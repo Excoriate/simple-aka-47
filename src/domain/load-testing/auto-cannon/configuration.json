@@ -1,0 +1,62 @@
+{
+  "schema":{
+    "title": "Sessions execution name, title, etc.",
+    "url": "",
+    "connections": "",
+    "duration": "",
+    "headers": {
+      "auth": "auth-token"
+    },
+
+    "requests": [
+
+      {
+        "method": "POST",
+        "path": "/login",
+        "body": "valid login details",
+        "headers": {}
+      },
+
+      {
+        "path": "/mySecretDetails"
+      },
+
+      {
+        "method": "PUT",
+        "path": "/mySecretDetails",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+
+        }
+      }
+
+    ]
+
+  },
+
+  "execution":{
+    "title": "",
+    "url": "",
+    "connections": "5000",
+    "duration": "120",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+
+    "requests": [
+
+      {
+        "method": "GET",
+        "path": "",
+        "body":"",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+
+    ]
+
+  }
+}

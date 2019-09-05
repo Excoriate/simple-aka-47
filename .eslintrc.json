@@ -1,0 +1,42 @@
+//Info: to avoid issues in airBnB recommendatios, let's install it as below:
+//npm info "eslint-config-airbnb@latest" peerDependencies
+//npx install-peerdeps --dev eslint-config-airbnb
+
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "mocha": true,
+        "jest": true
+    },
+
+    "extends": [ //"eslint:recommended", "plugin:prettier/recommended"],
+        "airbnb",
+        "eslint:recommended"],
+        //"plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 2018, // in case of errors, let's rollback to 2017 version.
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
+    },
+    "rules": {
+        "no-console": ["off"],
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}

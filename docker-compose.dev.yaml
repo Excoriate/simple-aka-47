@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  micro_service_dev:
+    image: ${DEV_CONTAINER_IMAGE_ID}
+    container_name: ${DEV_CONTAINER_NAME}
+    build:
+      args:
+        ARG_NODE_ENV : ${DEV_NODE_ENV}
+        ARG_LOG_LEVEL : ${DEV_LOG_LEVEL}
+        ARG_API_NAME: ${DEV_API_NAME}
+        ARG_PORT_EXPOSE: ${DEV_PORT_EXPOSE}
+        ARG_PORT_CONTAINER: ${DEV_PORT_CONTAINER}
+        ARG_PORT_HOST: ${DEV_PORT_HOST}
+        ARG_HOST: ${DEV_HOST}
+        ARG_PORT_DEBUG_CONTAINER: ${DEV_PORT_DEBUG_CONTAINER}
+        ARG_PORT_DEBUG_HOST: ${DEV_PORT_DEBUG_HOST}
+        ARG_WORKING_DIR: ${DEV_WORKING_DIR}
+        ARG_CONTAINER_NAME: ${DEV_CONTAINER_NAME}
+        ARG_CONTAINER_IMAGE_ID: ${DEV_CONTAINER_IMAGE_ID}
+        ARG_VOLUME_HOST: ${DEV_VOLUME_HOST}
+        ARG_VOLUME_CONTAINER: ${DEV_VOLUME_CONTAINER}
+      context: ./
+
+    volumes:
+      - ${DEV_VOLUME_HOST}:${DEV_VOLUME_CONTAINER}
+    expose:
+      - 3000
+      - 3306
+    ports:
+      - ${DEV_HOST}:${DEV_PORT_HOST}:${DEV_PORT_EXPOSE}
+      - ${DEV_HOST}:${DEV_PORT_DEBUG_HOST}:${DEV_PORT_DEBUG_CONTAINER}
+    working_dir: ${DEV_WORKING_DIR}
+    entrypoint: ./run.sh

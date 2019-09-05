@@ -1,0 +1,11 @@
+image:
+  repository:
+
+ingress:
+  enabled: true
+  uriPrefix: /ac/bot/
+  hosts:
+    - "*"
+
+pod:
+  initialDelaySeconds: 0

@@ -1,0 +1,60 @@
+FROM node:10 as builder
+MAINTAINER Alex Torres  alex@ideaup.cl
+
+#Alex: environment variables received in build-time
+ARG ARG_NODE_ENV
+ARG ARG_API_NAME
+ARG ARG_PORT_EXPOSE
+ARG ARG_PORT_CONTAINER
+ARG ARG_PORT_HOST
+ARG ARG_HOST
+ARG ARG_PORT_DEBUG_CONTAINER
+ARG ARG_PORT_DEBUG_HOST
+ARG ARG_WORKING_DIR
+ARG ARG_CONTAINER_NAME
+ARG ARG_CONTAINER_IMAGE_ID
+ARG ARG_VOLUME_HOST
+ARG ARG_VOLUME_CONTAINER
+ARG ARG_LOG_LEVEL
+
+ENV NODE_ENV ${ARG_NODE_ENV}
+ENV API_NAME ${ARG_API_NAME}
+ENV PORT_EXPOSE ${ARG_PORT_EXPOSE}
+ENV PORT_CONTAINER ${ARG_PORT_CONTAINER}
+ENV HOST ${ARG_HOST}
+ENV PORT_HOST ${ARG_PORT_HOST}
+ENV PORT_DEBUG_CONTAINER ${ARG_PORT_DEBUG_CONTAINER}
+ENV PORT_DEBUG_HOST ${ARG_PORT_DEBUG_HOST}
+ENV WORKING_DIR ${ARG_WORKING_DIR}
+ENV CONTAINER_NAME ${ARG_CONTAINER_NAME}
+ENV CONTAINER_IMAGE_ID ${ARG_CONTAINER_IMAGE_ID}
+ENV VOLUME_HOST ${ARG_VOLUME_HOST}
+ENV VOLUME_CONTAINER ${ARG_VOLUME_CONTAINER}
+ENV LOG_LEVEL ${ARG_LOG_LEVEL}
+
+
+RUN groupadd -r nodejs \
+   && useradd -m -r -g nodejs nodejs \
+   && apt-get update
+
+USER root
+RUN mkdir -p /opt/ideaup/$API_NAME/
+WORKDIR /opt/ideaup/$API_NAME/
+
+COPY ./ /opt/ideaup/$API_NAME/
+COPY ./run.sh /opt/ideaup/$API_NAME/
+
+RUN if [ "$NODE_ENV" != "production" ]; then \
+npm install -g nodemon \
+&& apt-get install -y vim \
+&& apt-get install lsof \
+&& apt-get install -y net-tools; else \
+npm install --production; fi
+
+RUN npm cache clean --force
+RUN ls -ltrah
+
+
+
+
+
